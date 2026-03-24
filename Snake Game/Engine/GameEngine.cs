@@ -47,6 +47,7 @@ namespace SnakeGamePro.Engine
 
             while (running)
             {
+                HandleInput();
                 Update();
                 Draw();
 
@@ -106,6 +107,38 @@ namespace SnakeGamePro.Engine
 
             OnGameOver?.Invoke();
         }
+
+        private void HandleInput()
+        {
+            if (!Console.KeyAvailable)
+                return;
+
+            var key = Console.ReadKey(true).Key;
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    direction = Direction.Up;
+                    break;
+
+                case ConsoleKey.DownArrow:
+                    direction = Direction.Down;
+                    break;
+
+                case ConsoleKey.LeftArrow:
+                    direction = Direction.Left;
+                    break;
+
+                case ConsoleKey.RightArrow:
+                    direction = Direction.Right;
+                    break;
+
+                case ConsoleKey.Spacebar:
+                    PauseGame();
+                    break;
+            }
+        }
+
 
 
     }
